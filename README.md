@@ -115,3 +115,5 @@ Some pages might work for Chrome but not Firefox because FF actually has stricte
 - Search for security.enterprise_roots.enabled
 - turn it on (value should be set to true)
 - Restart FF
+
+##Download Redux DevTools - Google Chrome
