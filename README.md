@@ -1,68 +1,117 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## To Run just the UI app:
 
-## Available Scripts
+To Run locally for development, in your terminal type `npm start`.
+<br />
+<br />
 
-In the project directory, you can run:
+## To run tests:
 
-### `npm start`
+To Test, in your terminal type `npm run test`.
+<br />
+<br />
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## To build artifacts for deployment:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+When this app is ready for deployment, run `npm run build` to generate artifacts into a `build/` folder.
+<br />
+<br />
+<br />
 
-### `npm test`
+# Seting up your IDE:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Since most people on the team uses Visual Studio Code, this section will focus on setting up VSCode.
+<br />
+<br />
+Install the following extensions:
 
-### `npm run build`
+- ESLint
+- GitLens
+- One Monokai Theme
+- Prettier
+- Sass Lint
+- TODO Highlighter
+- VSCode Great Icons
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Not everyone finds them useful, so install the extension that you need/want!
+<br />
+<br />
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Set up ESLint & Prettier:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you installed ESLint & Prettier, make sure you install them globally with `npm i -g eslint prettier`. After installing, configure VSCode to use them to auto lint!
+<br />
 
-### `npm run eject`
+- Go to File => Preferences => Settings.
+- Next to the search bar, click the ellipsis (...) button
+- Choose "open settings.json".
+- Under User Settings, make sure you have the following settings:
+  <br />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+{
+  "prettier.eslintIntegration": true,
+  "editor.formatOnSave": true
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br />
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Make sure you have an .eslintrc file at the root of your project and watch the magic happen!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br />
 
-## Learn More
+### Set up GitLens:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Make sure you have git installed.
+2. Make sure VSCode is pointing to the correct git.exe file.<br />
+   - Go to File => Preferences => Settings.<br />
+   - Next to the search bar, click the ellipsis (...) button<br />
+   - Choose "open settings.json".<br />
+   - Under User Settings, make sure you have the following settings:
+     <br />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+{
+  "gitlens.advanced.git": "C:\\Users\\YOUNAME\\AppData\\Local\\Programs\\Git\\git.exe",
+  "terminal.integrated.shell.windows": "C:\\Users\\YOUNAME\\AppData\\Local\\Programs\\Git\\bin\\bash.exe",
+  "git.path": "C:\\Users\\YOUNAME\\AppData\\Local\\Programs\\Git\\git.exe",
+}
+```
 
-### Code Splitting
+<br />
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Simply replace YOURNAME with your username.
 
-### Analyzing the Bundle Size
+**The above is set up for the default git location on windows.**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+<br />
+<br />
 
-### Making a Progressive Web App
+**_As an example, my User Settings look like:_**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+{
+  "gitlens.advanced.git": "C:\\Users\\LUSHEN9\\AppData\\Local\\Programs\\Git\\git.exe",
+  "terminal.integrated.shell.windows": "C:\\Users\\LUSHEN9\\AppData\\Local\\Programs\\Git\\bin\\bash.exe",
+  "editor.tabSize": 2,
+  "gitlens.currentLine.enabled": true,
+  "git.autofetch": true,
+  "git.path": "C:\\Users\\LUSHEN9\\AppData\\Local\\Programs\\Git\\git.exe",
+  "terminal.integrated.rendererType": "dom",
+  "explorer.confirmDelete": false,
+  "window.zoomLevel": 0,
+  "prettier.eslintIntegration": true,
+  "editor.formatOnSave": true
+}
+```
 
-### Advanced Configuration
+<br />
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+**A final note on using Firefox in Windows:**
+<br />
+Some pages might work for Chrome but not Firefox because FF actually has stricter security rules. To setup FF to use Windows security certificates,
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Open FF and in the url box, type about:config
+- Search for security.enterprise_roots.enabled
+- turn it on (value should be set to true)
+- Restart FF
