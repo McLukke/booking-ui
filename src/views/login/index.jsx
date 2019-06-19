@@ -6,6 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import PATHS from 'utils/paths';
 import { Button } from 'antd';
 import Spinner from 'components/spin';
+import Page from 'components/page';
 
 import { processLogin } from './actions';
 
@@ -37,13 +38,13 @@ class LoginPage extends React.Component {
     const { handleLogin, isLoading } = this.props;
 
     return (
-      <div>
+      <Page.Wrapper>
         Login Page goes here
         <Button type="primary" onClick={handleLogin} disabled={isLoading}>
           {isLoading && <Spinner style={{ marginRight: '.5rem' }} />}
           Login
         </Button>
-      </div>
+      </Page.Wrapper>
     );
   }
 }
