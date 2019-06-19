@@ -1,41 +1,59 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import { withRouter } from 'react-router-dom';
+import {
+  withRouter, Switch, Route, Redirect,
+} from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import PATHS from 'utils/paths';
+import isEmpty from 'lodash/isEmpty';
 
-import logo from './logo.svg';
-import AppWrapper from './App.styles.js';
+import LoginPage from 'views/login';
+import HomePage from 'views/home';
 
-// TODO:
-//   1) convert this to a class component
-//   2) check for a user session first thing (lifecycles)
-//     a) if there is a user session, redirect to login page
-//     b) otherwise, go show a dummy page for now
-const App = ({ history }) => (
-  <AppWrapper>
-    <AppWrapper.Header>
-      <AppWrapper.Logo src={logo} alt="logo" />
-      <AppWrapper.Intro>
-        {'Edit '}
-        <code>src/App.js</code>
-        {' and save to reload.'}
-      </AppWrapper.Intro>
+class BookingApp extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({}).isRequired,
+    user: PropTypes.shape({}).isRequired,
+  };
 
-      <AppWrapper.Link href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-        Learn React
-      </AppWrapper.Link>
+  componentDidMount() {
+    this.handleRedirect();
+  }
 
-      <AppWrapper.Intro>
-        {/* TODO: use { Switch, Route } from react-router-dom to show either login page or this page */}
-        <button type="button" onClick={() => history.push('/login')}>
-          or Login now!
-        </button>
-      </AppWrapper.Intro>
-    </AppWrapper.Header>
-  </AppWrapper>
-);
-App.propTypes = {
-  history: PropTypes.shape({}).isRequired,
-};
+  componentDidUpdate() {
+    this.handleRedirect();
+  }
 
-export default hot(withRouter(App));
+  handleRedirect = () => {
+    const {
+      user,
+      history: {
+        push,
+        location: { pathname },
+      },
+    } = this.props;
+    const exemptRoutes = pathname === PATHS.LOGIN;
+
+    if (isEmpty(user) && !exemptRoutes) {
+      push(PATHS.LOGIN);
+    }
+  };
+
+  render() {
+    console.log('props on main component: ', this.props);
+
+    return (
+      <Switch>
+        <Route path={PATHS.LOGIN} component={LoginPage} />
+        <Route path={PATHS.HOME} component={HomePage} />
+
+        <Redirect to={PATHS.HOME} />
+      </Switch>
+    );
+  }
+}
+
+const mapState = ({ login: { user } }) => ({ user });
+
+export default hot(withRouter(connect(mapState)(BookingApp)));
