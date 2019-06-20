@@ -13,33 +13,34 @@ const Page = styled(props => <div {...props} />)`
 Page.propTypes = propTypes;
 Page.defaultProps = defaultProps;
 
-const Wrapper = styled(props => <div {...props} />)`
+const Wrapper = styled(({ center, ...restProps }) => <div {...restProps} />)`
   display: flex;
-  flex-grow: 1;
   overflow: hidden;
-  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  justify-content: ${({ center }) => (center ? 'center' : 'flex-start')};
+  align-items: ${({ center }) => (center ? 'center' : 'flex-start')};
 `;
 Wrapper.propTypes = propTypes;
 Wrapper.defaultProps = defaultProps;
 
-const Container = styled(({ noBorder, ...restProps }) => <article {...restProps} />)`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+const Content = styled(({ border, ...restProps }) => <article {...restProps} />)`
+  display: block;
   position: relative;
   overflow: hidden;
-  border: ${({ noBorder }) => (noBorder ? 'none' : '1px solid')};
+  border: ${({ border }) => (border ? '1px solid' : 'none')};
+  padding: 1rem;
 `;
-Container.propTypes = {
+Content.propTypes = {
   ...propTypes,
-  noBorder: PropTypes.bool,
+  border: PropTypes.bool,
 };
-Container.defaultProps = {
+Content.defaultProps = {
   ...defaultProps,
-  noBorder: false,
+  border: false,
 };
 
 Page.Wrapper = Wrapper;
-Page.Container = Container;
+Page.Content = Content;
 
 export default Page;
